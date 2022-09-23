@@ -1,0 +1,46 @@
+---
+title: "p8105_hw1"
+author: "Hengxuan Ma"
+date: "2022-09-23"
+output: github_document
+---
+
+```{r include = FALSE}
+library(tidyverse)
+```
+
+# Problem 1
+
+## Load the dataset
+
+Load the penguins dataset.
+
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+## Write a short description of the dataset
+
+The penguins dataset has `r ncol(penguins)` important variables: `r colnames(penguins)`. 
+There are `r nlevels(pull(penguins, species))` levels under the variable `r colnames(penguins)[1]`.
+There are `r nlevels(pull(penguins, island))` levels under the variable `r colnames(penguins)[2]`.
+The variable `r colnames(penguins)[8]` has values of `r unique(pull(penguins, year))`.
+The dataset has `r nrow(penguins)` rows and `r ncol(penguins)` columns. 
+The mean flipper length is `r mean(as.numeric(pull(penguins, flipper_length_mm)), na.rm = TRUE)`.
+
+## Make a scatterplot
+
+Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x).
+
+```{r warning = FALSE}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) +
+  geom_point()
+```
+
+Export the scatterplot to the project directory.
+
+```{r warning = FALSE}
+ggsave("scatter_plot.pdf")
+```
+
+
